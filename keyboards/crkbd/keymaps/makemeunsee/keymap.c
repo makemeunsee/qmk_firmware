@@ -37,13 +37,14 @@ enum accents_keycodes {
   O_CIRCON,
   O_GRAVE,
   O_TREMA,
+  U_ACUTE,
   U_CIRCON,
   U_GRAVE,
   U_TREMA
 };
 
 // //Tap Dance Declarations
-enum { 
+enum {
 //   TD_ESC_TILD = 0,
 //   TD_LS_CAPS,
   TD_OS_ALT
@@ -86,7 +87,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //,-----------------------------------------------------.                    ,-----------------------------------------------------.
       XXXXXXX, E_GRAVE,E_CIRCON, E_ACUTE, E_TREMA, XXXXXXX,                      KC_HOME, KC_PGDN, KC_PGUP,  KC_END,  KC_INS,  KC_DEL,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      XXXXXXX, A_GRAVE,A_CIRCON,I_CIRCON, I_TREMA, XXXXXXX,                      KC_LEFT, KC_DOWN,   KC_UP, KC_RGHT, XXXXXXX, XXXXXXX,
+      A_ACUTE, A_GRAVE,A_CIRCON,I_CIRCON, I_TREMA, O_ACUTE,                      KC_LEFT, KC_DOWN,   KC_UP, KC_RGHT, XXXXXXX, XXXXXXX,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
       KC_LSFT, U_GRAVE, U_TREMA,   C_CED,O_CIRCON, O_GRAVE,                      XXXXXXX,LGUI(KC_1),LGUI(KC_2),LGUI(KC_3),LGUI(KC_4),KC_RSFT,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
@@ -107,7 +108,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   )
 };
 
-#ifdef OLED_DRIVER_ENABLE
+#ifdef OLED_ENABLE
 oled_rotation_t oled_init_user(oled_rotation_t rotation) {
   if (!is_keyboard_master()) {
     return OLED_ROTATION_180;  // flips the display 180 degrees if offhand
@@ -194,13 +195,14 @@ void oled_render_logo(void) {
     oled_write_P(crkbd_logo, false);
 }
 
-void oled_task_user(void) {
+bool oled_task_user(void) {
     if (is_keyboard_master()) {
         oled_render_layer_state();
         oled_render_keylog();
     } else {
         oled_render_logo();
     }
+    return false;
 }
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
@@ -270,6 +272,10 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
           tap_code(KC_CAPSLOCK);
           SEND_STRING("o\"");
           return false;
+        case U_ACUTE:
+          tap_code(KC_CAPSLOCK);
+          SEND_STRING("u'");
+          return false;
         case U_CIRCON:
           tap_code(KC_CAPSLOCK);
           SEND_STRING("u^");
@@ -287,4 +293,4 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   }
   return true;
 }
-#endif // OLED_DRIVER_ENABLE
+#endif // OLED_ENABLE
