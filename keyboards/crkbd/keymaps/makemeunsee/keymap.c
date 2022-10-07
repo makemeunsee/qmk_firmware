@@ -85,7 +85,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [2] = LAYOUT_split_3x6_3(
   //,-----------------------------------------------------.                    ,-----------------------------------------------------.
-      XXXXXXX, E_GRAVE,E_CIRCON, E_ACUTE, E_TREMA, XXXXXXX,                      KC_HOME, KC_PGDN, KC_PGUP,  KC_END,  KC_INS,  KC_DEL,
+      XXXXXXX, E_GRAVE,E_CIRCON, E_ACUTE, E_TREMA, U_ACUTE,                      KC_HOME, KC_PGDN, KC_PGUP,  KC_END,  KC_INS,  KC_DEL,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
       A_ACUTE, A_GRAVE,A_CIRCON,I_CIRCON, I_TREMA, O_ACUTE,                      KC_LEFT, KC_DOWN,   KC_UP, KC_RGHT, XXXXXXX, XXXXXXX,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
